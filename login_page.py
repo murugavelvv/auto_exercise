@@ -9,6 +9,9 @@ class LoginPage(BasePage):
     LOGIN_BUTTON = (By.XPATH, "//button[@data-qa='login-button']")
     LOGGED_USER_TEXT = (By.XPATH, "//li/a[contains(text(), 'Logged in as')]")
     ERROR_MSG = (By.XPATH, "//p[contains(text(), 'incorrect')]")
+    LOGOUT_BTN = (By.XPATH, "//a[contains(@href, '/logout')]")
+    EMAIL_ERROR = (By.XPATH, "//input[@name='email']/following-sibling::p")
+    PASSWORD_ERROR = (By.XPATH, "//input[@name='password']/following-sibling::p")
     
     def open(self):
         try:
@@ -40,3 +43,24 @@ class LoginPage(BasePage):
     def get_error_message(self):
         element = self.find(self.ERROR_MSG)
         return element.text
+    
+    def logout(self):
+        self.click(self.LOGOUT_BTN)
+    
+    def is_logged_out(self):
+        """Check if user is logged out by verifying login button is visible"""
+        return self.find(self.LOGIN_BUTTON)
+    
+    def get_email_error(self):
+        """Get validation error for email field"""
+        try:
+            return self.get_text(self.EMAIL_ERROR)
+        except TimeoutException:
+            return ""
+    
+    def get_password_error(self):
+        """Get validation error for password field"""
+        try:
+            return self.get_text(self.PASSWORD_ERROR)
+        except TimeoutException:
+            return ""

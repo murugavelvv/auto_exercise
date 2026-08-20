@@ -13,6 +13,8 @@ def driver():
     options.add_argument("--disable-gpu")
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-gpu-compositing")
     # Block ads and popup windows from hanging page load
     options.add_argument("--disable-popup-blocking")
     
@@ -22,7 +24,7 @@ def driver():
 
     service = Service(ChromeDriverManager().install())
     driver = webdriver.Chrome(service=service, options=options)
-    driver.set_page_load_timeout(10)
+    driver.set_page_load_timeout(30)
     
     yield driver
     
@@ -37,17 +39,21 @@ def pytest_runtest_makereport(item, call):
     if report.when == "call" and report.failed:
         driver = item.funcargs.get("driver")
         if driver:
-            if not os.path.exists("reports/screenshots"):
-                os.makedirs("reports/screenshots")
-            
-            screenshot = driver.get_screenshot_as_png()
-            screenshot_path = f"reports/screenshots/{item.name}.png"
-            
-            with open(screenshot_path, "wb") as f:
-                f.write(screenshot)
-            
-            import base64
-            screenshot_b64 = base64.b64encode(screenshot).decode('utf-8')
-            
-            report.extras = getattr(report, "extras", [])
-            report.extras.append(pytest_html.extras.image(screenshot_b64))
+            try:
+                if not os.path.exists("reports/screenshots"):
+                    os.makedirs("reports/screenshots")
+                
+                screenshot = driver.get_screenshot_as_png()
+                screenshot_path = f"reports/screenshots/{item.name}.png"
+                
+                with open(screenshot_path, "wb") as f:
+                    f.write(screenshot)
+                
+                import base64
+                screenshot_b64 = base64.b64encode(screenshot).decode('utf-8')
+                
+                report.extras = getattr(report, "extras", [])
+                report.extras.append(pytest_html.extras.image(screenshot_b64))
+            except Exception:
+                # Skip screenshot if browser is already closed or unavailable
+                pass
