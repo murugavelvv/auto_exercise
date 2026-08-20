@@ -1,116 +1,217 @@
-# E-commerce Automation Testing Framework
+# 🛒 E-Commerce Automation Testing Framework
 
-A Selenium + Pytest automation testing framework for the Automation Exercise e-commerce website.
+A simple **Selenium + Pytest automation testing project** created to automate testing of the [Automation Exercise](https://automationexercise.com/) e-commerce website.
 
-## Features
+## 🎯 Project Overview
 
-- **Page Object Model (POM)** design pattern for maintainable test code
-- **Explicit Waits** using WebDriverWait for reliable element interactions
-- **Pytest Parametrization** for data-driven testing
-- **HTML Reports** with screenshots on test failures
-- **GitHub Actions CI** for automated test execution
-- **Comprehensive Test Coverage**:
-  - Authentication and login validation
-  - Product catalog and search functionality
-  - Cart operations (add, remove, persistence)
-  - Checkout flow and payment validation
-  - Negative test cases and boundary conditions
+This project automates important e-commerce scenarios such as:
 
-## Prerequisites
+* Login validation
+* Product search
+* Add to cart
+* Remove from cart
+* Checkout
+* Negative test cases
+* End-to-end checkout flow
 
-- Python 3.12+
-- Chrome Browser
-- Git
+The framework uses **Page Object Model (POM)** to keep the automation code simple, reusable, and easy to maintain.
 
-## Installation
+## 🛠️ Technologies Used
 
-1. Clone the repository:
+* Python
+* Selenium WebDriver
+* Pytest
+* Pytest HTML
+* WebDriver Manager
+* Page Object Model (POM)
+* GitHub Actions
+
+## 📁 Project Structure
+
+```text
+auto_exercise/
+│
+├── base.py
+├── conftest.py
+├── login_page.py
+├── product_page.py
+├── checkout_page.py
+│
+├── test_login.py
+├── test_product.py
+├── test_cart.py
+├── test_checkout_negative.py
+├── test_e2e_checkout.py
+│
+├── .github/
+│   └── workflows/
+│       └── pytest.yml
+│
+└── requirements.txt
+```
+
+## ⚙️ Setup
+
+### 1. Clone the repository
+
 ```bash
 git clone https://github.com/murugavelvv/auto_exercise.git
 cd auto_exercise
 ```
 
-2. Install dependencies:
+### 2. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-## Project Structure
+### 3. Run tests
 
-```
-auto_exercise/
-├── base.py                 # BasePage class with common methods
-├── conftest.py             # Pytest fixtures and hooks
-├── login_page.py           # Login page object
-├── product_page.py         # Product page object
-├── checkout_page.py        # Checkout page object
-├── test_login.py           # Login test cases
-├── test_product.py         # Product test cases
-├── test_cart.py            # Cart test cases
-├── test_checkout_negative.py # Negative checkout test cases
-├── test_e2e_checkout.py    # End-to-end checkout test
-├── .github/
-│   └── workflows/
-│       └── pytest.yml      # GitHub Actions CI workflow
-└── requirements.txt         # Python dependencies
+```bash
+pytest
 ```
 
-## Running Tests
+## 📊 HTML Test Report
 
-### Run all tests locally:
+Generate an HTML report using:
+
 ```bash
 pytest --html=reports/report.html --self-contained-html
 ```
 
-### Run tests in parallel (faster execution):
-```bash
-pip install pytest-xdist
-pytest -n 3 --html=reports/report.html --self-contained-html
+The report contains:
+
+* Test results
+* Pass/Fail status
+* Execution time
+* Failure details
+* Screenshots for failed tests
+
+## 🔄 CI/CD
+
+GitHub Actions is used to automatically execute the automation tests when changes are pushed to the repository.
+
+## 🧪 Testing Approach
+
+The project follows a simple testing workflow:
+
+**Manual Testing → Test Cases → Automation → Test Execution → HTML Report → CI/CD**
+
+## 🚀 Key Features
+
+* Reusable Page Object Model
+* Explicit waits for stable execution
+* Data-driven testing with Pytest
+* Positive and negative test cases
+* Automated HTML reports
+* Screenshot capture for failures
+* GitHub Actions integration
+
+# 🛒 E-Commerce Automation Testing Framework
+
+A simple **Selenium + Pytest automation testing project** created to automate testing of the [Automation Exercise](https://automationexercise.com/) e-commerce website.
+
+## 🎯 Project Overview
+
+This project automates important e-commerce scenarios such as:
+
+* Login validation
+* Product search
+* Add to cart
+* Remove from cart
+* Checkout
+* Negative test cases
+* End-to-end checkout flow
+
+The framework uses **Page Object Model (POM)** to keep the automation code simple, reusable, and easy to maintain.
+
+## 🛠️ Technologies Used
+
+* Python
+* Selenium WebDriver
+* Pytest
+* Pytest HTML
+* WebDriver Manager
+* Page Object Model (POM)
+* GitHub Actions
+
+## 📁 Project Structure
+
+```text
+auto_exercise/
+│
+├── base.py
+├── conftest.py
+├── login_page.py
+├── product_page.py
+├── checkout_page.py
+│
+├── test_login.py
+├── test_product.py
+├── test_cart.py
+├── test_checkout_negative.py
+├── test_e2e_checkout.py
+│
+├── .github/
+│   └── workflows/
+│       └── pytest.yml
+│
+└── requirements.txt
 ```
 
-### Run specific test file:
+## ⚙️ Setup
+
+### 1. Clone the repository
+
 ```bash
-pytest test_login.py --html=reports/report.html
+git clone https://github.com/murugavelvv/auto_exercise.git
+cd auto_exercise
 ```
 
-### Run specific test:
+### 2. Install dependencies
+
 ```bash
-pytest test_login.py::test_valid_login --html=reports/report.html
+pip install -r requirements.txt
 ```
 
-## Test Reports
+### 3. Run tests
 
-After test execution, an HTML report is generated at `reports/report.html` with:
-- Test execution summary
-- Pass/fail status for each test
-- Screenshots of failures (if any)
-- Execution time
+```bash
+pytest
+```
 
-## CI/CD
+## 📊 HTML Test Report
 
-Tests automatically run on GitHub Actions when code is pushed to the `main` branch. View the results in the **Actions** tab of the repository.
+Generate an HTML report using:
 
-## Technologies Used
+```bash
+pytest --html=reports/report.html --self-contained-html
+```
 
-- **Selenium WebDriver** - Browser automation
-- **Pytest** - Test framework
-- **pytest-html** - HTML reporting
-- **webdriver-manager** - Chrome driver management
-- **Page Object Model** - Design pattern
+The report contains:
 
-## Test Credentials
+* Test results
+* Pass/Fail status
+* Execution time
+* Failure details
+* Screenshots for failed tests
 
-- Email: `vmurugavel877@gmail.com`
-- Password: `muru@123`
+## 🔄 CI/CD
 
-## Contributing
+GitHub Actions is used to automatically execute the automation tests when changes are pushed to the repository.
 
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Run tests to ensure they pass
-5. Submit a pull request
+## 🧪 Testing Approach
 
-## License
+The project follows a simple testing workflow:
 
-This project is open source and available under the MIT License.
+**Manual Testing → Test Cases → Automation → Test Execution → HTML Report → CI/CD**
+
+## 🚀 Key Features
+
+* Reusable Page Object Model
+* Explicit waits for stable execution
+* Data-driven testing with Pytest
+* Positive and negative test cases
+* Automated HTML reports
+* Screenshot capture for failures
+* GitHub Actions integration
